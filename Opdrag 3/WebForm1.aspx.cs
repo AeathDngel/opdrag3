@@ -22,4 +22,4 @@ namespace Opdrag_3
            Label1.Text = (memKb / 1024 / 1024) + " GB of RAM installed.";
         }
     }
-}//
+}
