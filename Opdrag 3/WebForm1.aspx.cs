@@ -19,7 +19,10 @@ namespace Opdrag_3
         {
             long memKb;
             GetPhysicallyInstalledSystemMemory(out memKb);
-           Label1.Text = (memKb / 1024 / 1024) + " GB of RAM installed.";
+           
+            Label1.Text = (memKb / 1024 / 1024) + " GB of RAM installed.";
+
+            
         }
     }
 }
