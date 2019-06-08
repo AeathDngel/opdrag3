@@ -138,7 +138,43 @@ namespace Opdrag_3
                     Table1.Rows.Add(r);
                 }
             }
-           
+            if (x == 2)
+            {
+
+                rows = Int32.Parse(TextBox1.Text) / Int32.Parse(TextBox2.Text); //VARIABLE
+
+                pnr = new int[rows];
+                fnr = new int[rows];
+
+                string[] readText = File.ReadAllLines(path);
+                bool pageexist = false;
+
+                for (int c = 0; c < readText.Length; c++)
+                {
+                    if (TextBox4.Text == readText[c])
+                        pageexist = true;
+                }
+                //Label4.Text = readText[0];
+                if (pageexist == false)
+                {
+                    string[] count = File.ReadAllLines(path2);
+
+                    if (Int32.Parse(count[0]) == rows - 1)
+                    {
+                        count[0] = "0";
+                    }
+                    else
+                    {
+                        count[0] = (Int32.Parse(count[0]) + 1).ToString();
+                    }
+                    //   int counts = Int32.Parse(count[0]);
+
+                 
+                    }
+                }
+
+
+            }
         }
     }
 }
