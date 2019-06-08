@@ -86,8 +86,59 @@ namespace Opdrag_3
             path = paths.Substring(6) + "/" + fileName;
             string path2 = paths.Substring(6) + "/count.txt";
 
+            rows = Int32.Parse(TextBox1.Text) / Int32.Parse(TextBox2.Text); //VARIABLE
+            int cols = 2;
+            pnr = new int[rows];
+            fnr = new int[rows];
+
+            Random rand = new Random();
+
+            if (x == 1)
+            {
+                System.IO.File.WriteAllText(path2, string.Empty);
+                using (FileStream fs = new FileStream(path2, FileMode.Append, FileAccess.Write))
+                using (StreamWriter outputFile = new StreamWriter(fs))
+                {
+
+                    outputFile.WriteLine("-1"); // Write the file.
+                }
+
+
+                System.IO.File.WriteAllText(path, string.Empty);
+
+                for (int j = 0; j < rows; j++)
+                {
+                    TableRow r = new TableRow();
+                    for (int i = 0; i < cols; i++)
+                    {
+                        TableCell c = new TableCell();
+                        if (i == 0)
+                        {
+                            pnr[i] = j;
+                            c.Controls.Add(new LiteralControl(j.ToString()));
+                        }
+                        else
+                        {
+                            int num = eliminateDuplicates(rand.Next(0, 1000));
+                            fnr[i] = num;
+                            c.Controls.Add(new LiteralControl(num.ToString()));
+
+                            using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                            using (StreamWriter outputFile = new StreamWriter(fs))
+                            {
+
+                                outputFile.WriteLine(fnr[i]); // Write the file.
+                            }
+
+
+
+                        }
+                        r.Cells.Add(c);
+                    }
+                    Table1.Rows.Add(r);
+                }
+            }
            
-            
         }
     }
 }
