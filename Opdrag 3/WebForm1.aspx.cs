@@ -169,12 +169,55 @@ namespace Opdrag_3
                     }
                     //   int counts = Int32.Parse(count[0]);
 
-                 
+                    readText[Int32.Parse(count[0])] = TextBox4.Text;
+
+
+                    Label4.Text += " " + count[0] + "rows:" + rows;
+
+
+                    System.IO.File.WriteAllText(path2, string.Empty);
+
+                    using (FileStream fs = new FileStream(path2, FileMode.Append, FileAccess.Write))
+                    using (StreamWriter outputFile = new StreamWriter(fs))
+                    {
+
+                        outputFile.WriteLine(count[0]); // Write the file.
+                    }
+
+                    System.IO.File.WriteAllText(path, string.Empty);
+
+                    for (int l = 0; l < rows; l++)
+                    {
+                        TableRow r = new TableRow();
+                        for (int m = 0; m < cols; m++)
+                        {
+                            TableCell c = new TableCell();
+                            if (m == 0)
+                            {
+
+                                c.Controls.Add(new LiteralControl(l.ToString()));
+                            }
+                            else
+                            {
+
+                                c.Controls.Add(new LiteralControl(readText[l].ToString()));
+
+                                using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                                using (StreamWriter outputFile = new StreamWriter(fs))
+                                {
+
+                                    outputFile.WriteLine(readText[l]); // Write the file.
+                                }
+
+
+
+                            }
+                            r.Cells.Add(c);
+                        }
+                        Table1.Rows.Add(r);
                     }
                 }
-
-
-            }
+            
         }
     }
 }
