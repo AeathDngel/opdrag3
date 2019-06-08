@@ -22,27 +22,24 @@ namespace Opdrag_3
         private int[] pnr;
         private int[] fnr;
         private int rows;
+        private long memKb;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            long memKb;
+            
             GetPhysicallyInstalledSystemMemory(out memKb);
 
-            Label1.Text = (memKb / 1024 / 1024) + " GB of RAM installed.";
+            Label1.Text = (memKb / 1024 / 1024) + " GB of RAM installed. | " + memKb + " kB or RAM installed";
 
 
 
 
         }
-        string path = "E:/Dropbox/Zonica/Klas/ITRW316/Eksamen Projek/O3/Opdrag 3/Opdrag 3";
 
         protected void TestSubmit_ServerClick(object sender, EventArgs e)
         {
-            using (StreamWriter _testData = new StreamWriter(Server.MapPath("E:/ Dropbox / Zonica / Klas / ITRW316 / Eksamen Projek / O3 / Opdrag 3 / Opdrag 3/data.txt"), true))
-            {
-                _testData.WriteLine(fnr); // Write the file.
-
-            }
+         
+            
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -68,8 +65,6 @@ namespace Opdrag_3
 
         protected void TextBox3_TextChanged(object sender, EventArgs e)
         {
-            /*  
-               }*/
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -79,11 +74,30 @@ namespace Opdrag_3
 
         public void setTable(int x)
         {
+            GetPhysicallyInstalledSystemMemory(out memKb);
 
+            if (Int32.Parse(TextBox1.Text) > memKb)
+            {
+                Label4.Text = "You allocated to much memory to reserve!";
+                return;
+            }
+            else if(Int32.Parse(TextBox1.Text) <= 0)
+            {
+                Label4.Text = "You can't allocate no memory to reserve!";
+                return;
+            }
+
+            if (Int32.Parse(TextBox2.Text) > Int32.Parse(TextBox1.Text))
+            {
+                Label4.Text = "Your page frame size can't be bigger than your allocated reserve memory!!";
+                return;
+            }
+
+            Label4.Text = "";
 
             string fileName = "data.txt";
             string paths = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            path = paths.Substring(6) + "/" + fileName;
+            string path = paths.Substring(6) + "/" + fileName;
             string path2 = paths.Substring(6) + "/count.txt";
 
             rows = Int32.Parse(TextBox1.Text) / Int32.Parse(TextBox2.Text); //VARIABLE
@@ -251,6 +265,12 @@ namespace Opdrag_3
 
 
             }
+        }
+
+        protected void TextBox4_TextChanged(object sender, EventArgs e)
+        {
+
+         
         }
     }
 }
