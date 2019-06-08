@@ -171,10 +171,6 @@ namespace Opdrag_3
 
                     readText[Int32.Parse(count[0])] = TextBox4.Text;
 
-
-                    Label4.Text += " " + count[0] + "rows:" + rows;
-
-
                     System.IO.File.WriteAllText(path2, string.Empty);
 
                     using (FileStream fs = new FileStream(path2, FileMode.Append, FileAccess.Write))
@@ -220,7 +216,7 @@ namespace Opdrag_3
                 else
                 {
 
-                    Label4.Text = "Page already exists idiot";
+                    Label4.Text = "Page already exists";
                     for (int l = 0; l < rows; l++)
                     {
                         TableRow r = new TableRow();
