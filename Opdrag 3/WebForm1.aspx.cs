@@ -217,7 +217,44 @@ namespace Opdrag_3
                         Table1.Rows.Add(r);
                     }
                 }
-            
+                else
+                {
+
+                    Label4.Text = "Page already exists idiot";
+                    for (int l = 0; l < rows; l++)
+                    {
+                        TableRow r = new TableRow();
+                        for (int m = 0; m < cols; m++)
+                        {
+                            TableCell c = new TableCell();
+                            if (m == 0)
+                            {
+
+                                c.Controls.Add(new LiteralControl(l.ToString()));
+                            }
+                            else
+                            {
+
+                                c.Controls.Add(new LiteralControl(readText[l].ToString()));
+
+                                using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                                using (StreamWriter outputFile = new StreamWriter(fs))
+                                {
+
+                                    outputFile.WriteLine(readText[l]); // Write the file.
+                                }
+
+                                
+
+                            }
+                            r.Cells.Add(c);
+                        }
+                        Table1.Rows.Add(r);
+                    }
+                }
+
+
+            }
         }
     }
 }
