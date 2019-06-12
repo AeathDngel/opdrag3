@@ -19,6 +19,7 @@ namespace Opdrag_3
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetPhysicallyInstalledSystemMemory(out long TotalMemoryInKilobytes);
 
+        private int valueReturn = 0;
         private int[] pnr;
         private int[] fnr;
         private int rows;
@@ -47,20 +48,31 @@ namespace Opdrag_3
             setTable(1);
         }
 
-        public int eliminateDuplicates(int value)
+        public void eliminateDuplicates(int value)
         {
 
             Random rand = new Random();
-
+            int count = 0;
             for (int i = 0; i < fnr.Length; i++)
             {
                 if (fnr[i] == value)
-                    eliminateDuplicates(rand.Next(0, 1000));
-                else
-                    return value;
+                    count++;
+
+
 
             }
-            return value;
+
+            if (count > 0)
+            {
+                eliminateDuplicates(rand.Next(0, 1000));
+
+            }
+            else if (count == 0)
+            {
+                // MessageBox.Show(value.ToString());
+                valueReturn = value;
+            }
+
         }
 
         protected void TextBox3_TextChanged(object sender, EventArgs e)
@@ -133,7 +145,8 @@ namespace Opdrag_3
                         }
                         else
                         {
-                            int num = eliminateDuplicates(rand.Next(0, 1000));
+                            eliminateDuplicates(rand.Next(0, 1000));
+                            int num = valueReturn;
                             fnr[i] = num;
                             c.Controls.Add(new LiteralControl(num.ToString()));
 
