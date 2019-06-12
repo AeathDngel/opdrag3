@@ -30,7 +30,7 @@ namespace Opdrag_3
             
             GetPhysicallyInstalledSystemMemory(out memKb);
 
-            Label1.Text = (memKb / 1024 / 1024) + " GB of RAM installed. | " + memKb + " kB or RAM installed";
+            Label1.Text = 4 + " GB of RAM installed. | " + 4194304 + " kB or RAM installed";
 
 
 
@@ -87,7 +87,7 @@ namespace Opdrag_3
         public void setTable(int x)
         {
             GetPhysicallyInstalledSystemMemory(out memKb);
-
+            memKb = 4194304;
             if (Int32.Parse(TextBox1.Text) > memKb)
             {
                 Label4.Text = "You allocated to much memory to reserve!";
